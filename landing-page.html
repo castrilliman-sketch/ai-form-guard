@@ -1,0 +1,864 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OneShot AI - Optimize AI Prompts & Save on API Costs</title>
+  <meta name="description" content="OneShot AI optimizes your ChatGPT and Claude prompts for clarity, context, and token savings. Save up to 25% on API costs.">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    :root {
+      --primary: #4f46e5;
+      --primary-dark: #4338ca;
+      --secondary: #059669;
+      --secondary-dark: #047857;
+      --text-dark: #1f2937;
+      --text-gray: #6b7280;
+      --bg-light: #f9fafb;
+      --bg-lighter: #f3f4f6;
+      --border: #e5e7eb;
+    }
+    
+    html {
+      scroll-behavior: smooth;
+    }
+    
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      color: var(--text-dark);
+      line-height: 1.6;
+      background: white;
+    }
+    
+    /* Navigation */
+    nav {
+      position: sticky;
+      top: 0;
+      background: white;
+      border-bottom: 1px solid var(--border);
+      z-index: 1000;
+      padding: 16px 0;
+    }
+    
+    .nav-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .logo {
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--primary);
+      text-decoration: none;
+    }
+    
+    .nav-links {
+      display: flex;
+      gap: 32px;
+      list-style: none;
+    }
+    
+    .nav-links a {
+      text-decoration: none;
+      color: var(--text-gray);
+      font-size: 14px;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+    
+    .nav-links a:hover {
+      color: var(--primary);
+    }
+    
+    @media (max-width: 768px) {
+      .nav-links {
+        display: none;
+      }
+    }
+    
+    /* Hero Section */
+    .hero {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      padding: 100px 20px;
+      text-align: center;
+    }
+    
+    .hero-content {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    
+    .hero h1 {
+      font-size: 56px;
+      font-weight: 800;
+      margin-bottom: 16px;
+      line-height: 1.2;
+    }
+    
+    .hero-subtitle {
+      font-size: 20px;
+      margin-bottom: 32px;
+      opacity: 0.95;
+      line-height: 1.5;
+    }
+    
+    .hero-cta {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    
+    .btn {
+      padding: 14px 32px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 16px;
+      border: none;
+      cursor: pointer;
+      transition: all 0.3s;
+      display: inline-block;
+    }
+    
+    .btn-primary {
+      background: white;
+      color: var(--primary);
+    }
+    
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+    }
+    
+    .btn-secondary {
+      background: transparent;
+      color: white;
+      border: 2px solid white;
+    }
+    
+    .btn-secondary:hover {
+      background: white;
+      color: var(--primary);
+    }
+    
+    @media (max-width: 768px) {
+      .hero h1 {
+        font-size: 36px;
+      }
+      
+      .hero-subtitle {
+        font-size: 16px;
+      }
+    }
+    
+    /* Features Section */
+    .features {
+      max-width: 1200px;
+      margin: 100px auto;
+      padding: 0 20px;
+    }
+    
+    .section-title {
+      font-size: 36px;
+      font-weight: 800;
+      text-align: center;
+      margin-bottom: 16px;
+      color: var(--text-dark);
+    }
+    
+    .section-subtitle {
+      text-align: center;
+      color: var(--text-gray);
+      font-size: 16px;
+      margin-bottom: 60px;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 32px;
+    }
+    
+    .feature-card {
+      background: var(--bg-light);
+      padding: 32px;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      transition: all 0.3s;
+    }
+    
+    .feature-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 24px rgba(0, 0, 0, 0.08);
+    }
+    
+    .feature-icon {
+      font-size: 40px;
+      margin-bottom: 16px;
+    }
+    
+    .feature-card h3 {
+      font-size: 18px;
+      margin-bottom: 12px;
+      color: var(--text-dark);
+    }
+    
+    .feature-card p {
+      color: var(--text-gray);
+      font-size: 14px;
+      line-height: 1.6;
+    }
+    
+    /* How It Works */
+    .how-it-works {
+      background: var(--bg-lighter);
+      padding: 100px 20px;
+      margin: 100px 0;
+    }
+    
+    .how-it-works-content {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    
+    .steps-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 40px;
+      margin-top: 60px;
+    }
+    
+    .step {
+      text-align: center;
+    }
+    
+    .step-number {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 50px;
+      height: 50px;
+      background: var(--primary);
+      color: white;
+      border-radius: 50%;
+      font-weight: 800;
+      font-size: 20px;
+      margin: 0 auto 16px;
+    }
+    
+    .step h3 {
+      font-size: 18px;
+      margin-bottom: 8px;
+      color: var(--text-dark);
+    }
+    
+    .step p {
+      color: var(--text-gray);
+      font-size: 14px;
+    }
+    
+    /* Video Section */
+    .video-section {
+      max-width: 1200px;
+      margin: 100px auto;
+      padding: 0 20px;
+    }
+    
+    .video-wrapper {
+      aspect-ratio: 16 / 9;
+      background: var(--bg-light);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 2px solid var(--border);
+      margin-top: 40px;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+    
+    .video-wrapper:hover {
+      border-color: var(--primary);
+      box-shadow: 0 8px 24px rgba(79, 70, 229, 0.15);
+    }
+    
+    .play-button {
+      width: 80px;
+      height: 80px;
+      background: var(--primary);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 32px;
+      color: white;
+      transition: all 0.3s;
+    }
+    
+    .video-wrapper:hover .play-button {
+      transform: scale(1.1);
+      background: var(--primary-dark);
+    }
+    
+    /* Pricing Section */
+    .pricing {
+      max-width: 1200px;
+      margin: 100px auto;
+      padding: 0 20px;
+    }
+    
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 32px;
+      margin-top: 60px;
+    }
+    
+    .pricing-card {
+      background: white;
+      border: 2px solid var(--border);
+      border-radius: 12px;
+      padding: 40px;
+      text-align: center;
+      transition: all 0.3s;
+    }
+    
+    .pricing-card.featured {
+      border-color: var(--secondary);
+      transform: scale(1.05);
+      box-shadow: 0 20px 40px rgba(5, 150, 105, 0.15);
+    }
+    
+    .popular-badge {
+      display: inline-block;
+      background: #dcfce7;
+      color: var(--secondary);
+      padding: 6px 12px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 700;
+      margin-bottom: 16px;
+    }
+    
+    .pricing-card h3 {
+      font-size: 20px;
+      margin-bottom: 8px;
+      color: var(--text-dark);
+    }
+    
+    .price {
+      font-size: 48px;
+      font-weight: 800;
+      color: var(--primary);
+      margin: 24px 0 8px;
+    }
+    
+    .price-period {
+      color: var(--text-gray);
+      font-size: 14px;
+      margin-bottom: 32px;
+    }
+    
+    .features-list {
+      text-align: left;
+      margin-bottom: 32px;
+    }
+    
+    .features-list li {
+      list-style: none;
+      padding: 10px 0;
+      color: var(--text-gray);
+      font-size: 14px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    
+    .features-list li:before {
+      content: "✓";
+      color: var(--secondary);
+      font-weight: 700;
+    }
+    
+    .pricing-card .btn {
+      width: 100%;
+      display: block;
+    }
+    
+    .pricing-card.featured .btn-primary {
+      background: var(--secondary);
+      color: white;
+    }
+    
+    .pricing-card.featured .btn-primary:hover {
+      background: var(--secondary-dark);
+    }
+    
+    .pricing-card:not(.featured) .btn-primary {
+      background: var(--primary);
+      color: white;
+    }
+    
+    .pricing-card:not(.featured) .btn-primary:hover {
+      background: var(--primary-dark);
+    }
+    
+    /* FAQ Section */
+    .faq {
+      background: var(--bg-lighter);
+      padding: 100px 20px;
+      margin: 100px 0;
+    }
+    
+    .faq-content {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    
+    .faq-item {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      margin-bottom: 16px;
+      overflow: hidden;
+    }
+    
+    .faq-question {
+      padding: 20px;
+      background: white;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-weight: 600;
+      color: var(--text-dark);
+      transition: all 0.2s;
+      user-select: none;
+    }
+    
+    .faq-question:hover {
+      background: var(--bg-light);
+    }
+    
+    .faq-toggle {
+      font-size: 20px;
+      transition: transform 0.2s;
+    }
+    
+    .faq-item.active .faq-toggle {
+      transform: rotate(180deg);
+    }
+    
+    .faq-answer {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease;
+      padding: 0 20px;
+    }
+    
+    .faq-item.active .faq-answer {
+      max-height: 500px;
+      padding: 0 20px 20px 20px;
+    }
+    
+    .faq-answer p {
+      color: var(--text-gray);
+      font-size: 14px;
+      line-height: 1.6;
+    }
+    
+    /* CTA Section */
+    .cta {
+      background: linear-gradient(135deg, var(--primary) 0%, #7c3aed 100%);
+      color: white;
+      padding: 80px 20px;
+      text-align: center;
+    }
+    
+    .cta-content {
+      max-width: 600px;
+      margin: 0 auto;
+    }
+    
+    .cta h2 {
+      font-size: 40px;
+      font-weight: 800;
+      margin-bottom: 16px;
+    }
+    
+    .cta p {
+      font-size: 18px;
+      margin-bottom: 32px;
+      opacity: 0.95;
+    }
+    
+    /* Footer */
+    footer {
+      background: var(--text-dark);
+      color: white;
+      padding: 40px 20px;
+      text-align: center;
+    }
+    
+    .footer-content {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 24px;
+      margin-bottom: 24px;
+      flex-wrap: wrap;
+    }
+    
+    .footer-links a {
+      color: #d1d5db;
+      text-decoration: none;
+      font-size: 14px;
+      transition: color 0.2s;
+    }
+    
+    .footer-links a:hover {
+      color: white;
+    }
+    
+    .footer-bottom {
+      border-top: 1px solid #374151;
+      padding-top: 24px;
+      color: #9ca3af;
+      font-size: 13px;
+    }
+    
+    /* Responsive */
+    @media (max-width: 768px) {
+      .section-title {
+        font-size: 28px;
+      }
+      
+      .pricing-card.featured {
+        transform: scale(1);
+      }
+      
+      .cta h2 {
+        font-size: 28px;
+      }
+      
+      .hero {
+        padding: 60px 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav>
+    <div class="nav-container">
+      <a href="#" class="logo">⚡ OneShot AI</a>
+      <ul class="nav-links">
+        <li><a href="#features">Features</a></li>
+        <li><a href="#how">How It Works</a></li>
+        <li><a href="#pricing">Pricing</a></li>
+        <li><a href="#faq">FAQ</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-content">
+      <h1>Optimize Your AI Prompts. Save on API Costs.</h1>
+      <p class="hero-subtitle">
+        OneShot AI intercepts weak prompts on ChatGPT and Claude, suggesting optimizations that reduce token usage by up to 25%. See real cost savings in every prompt.
+      </p>
+      <div class="hero-cta">
+        <a href="#pricing" class="btn btn-primary">Get Started Now</a>
+        <a href="#how" class="btn btn-secondary">Learn More →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features Section -->
+  <section class="features" id="features">
+    <h2 class="section-title">Why Teams Choose OneShot AI</h2>
+    <p class="section-subtitle">
+      A smarter way to interact with AI. Save tokens, save money, and get better results.
+    </p>
+    
+    <div class="features-grid">
+      <div class="feature-card">
+        <div class="feature-icon">⚡</div>
+        <h3>Real-Time Optimization</h3>
+        <p>Get instant suggestions to improve your prompts before submission. No delays, no friction.</p>
+      </div>
+      
+      <div class="feature-card">
+        <div class="feature-icon">💰</div>
+        <h3>See Your Savings</h3>
+        <p>Track token reduction and real GBP cost savings on every prompt. Watch the money add up.</p>
+      </div>
+      
+      <div class="feature-card">
+        <div class="feature-icon">🔧</div>
+        <h3>ChatGPT & Claude</h3>
+        <p>Works seamlessly on both platforms. Install once, optimize everywhere.</p>
+      </div>
+      
+      <div class="feature-card">
+        <div class="feature-icon">📱</div>
+        <h3>All Devices</h3>
+        <p>Mac, Windows, and Linux. Full Chrome extension support across your setup.</p>
+      </div>
+      
+      <div class="feature-card">
+        <div class="feature-icon">🎯</div>
+        <h3>Smart Detection</h3>
+        <p>Automatically identifies vague prompts and suggests structured alternatives.</p>
+      </div>
+      
+      <div class="feature-card">
+        <div class="feature-icon">🚀</div>
+        <h3>Zero Setup</h3>
+        <p>Install and use immediately. Built-in setup guide makes it effortless.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- How It Works -->
+  <section class="how-it-works" id="how">
+    <div class="how-it-works-content">
+      <h2 class="section-title">How It Works</h2>
+      <p class="section-subtitle">
+        Four simple steps to start saving on AI costs.
+      </p>
+      
+      <div class="steps-grid">
+        <div class="step">
+          <div class="step-number">1</div>
+          <h3>Type a Prompt</h3>
+          <p>Use ChatGPT or Claude as normal</p>
+        </div>
+        
+        <div class="step">
+          <div class="step-number">2</div>
+          <h3>OneShot Intercepts</h3>
+          <p>If it's weak or vague, we pause submission</p>
+        </div>
+        
+        <div class="step">
+          <div class="step-number">3</div>
+          <h3>See Suggestions</h3>
+          <p>Review the optimization + token savings breakdown</p>
+        </div>
+        
+        <div class="step">
+          <div class="step-number">4</div>
+          <h3>Save & Submit</h3>
+          <p>Use optimized version or send original—your choice</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Video Demo -->
+  <section class="video-section">
+    <h2 class="section-title">See It In Action</h2>
+    <p class="section-subtitle">
+      Watch how OneShot AI optimizes prompts and calculates real token savings.
+    </p>
+    
+    <div class="video-wrapper" onclick="alert('Video demo coming soon! Subscribe below to be notified.')">
+      <div class="play-button">▶</div>
+    </div>
+  </section>
+
+  <!-- Pricing Section -->
+  <section class="pricing" id="pricing">
+    <h2 class="section-title">Simple, Transparent Pricing</h2>
+    <p class="section-subtitle">
+      Choose the plan that fits your needs. Cancel anytime.
+    </p>
+    
+    <div class="pricing-grid">
+      <div class="pricing-card">
+        <h3>Essential</h3>
+        <div class="price">£11<span style="font-size: 24px; color: var(--text-gray);">/mo</span></div>
+        <p class="price-period">Perfect for individuals</p>
+        
+        <ul class="features-list">
+          <li>Standard prompt optimization</li>
+          <li>ChatGPT & Claude support</li>
+          <li>Token tracking</li>
+          <li>Email support</li>
+        </ul>
+        
+        <button class="btn btn-primary" onclick="redirectToCheckout('essential')">Get Started</button>
+      </div>
+      
+      <div class="pricing-card featured">
+        <div class="popular-badge">🌟 MOST POPULAR</div>
+        <h3>Pro</h3>
+        <div class="price">£18<span style="font-size: 24px; color: var(--text-gray);">/mo</span></div>
+        <p class="price-period">For power users & teams</p>
+        
+        <ul class="features-list">
+          <li>Advanced prompt analysis</li>
+          <li>ChatGPT & Claude support</li>
+          <li>Detailed token tracking</li>
+          <li>Real-time cost breakdown</li>
+          <li>Priority feature access</li>
+          <li>Priority support</li>
+        </ul>
+        
+        <button class="btn btn-primary" onclick="redirectToCheckout('pro')">Start Free Trial</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ Section -->
+  <section class="faq" id="faq">
+    <div class="faq-content">
+      <h2 class="section-title">Frequently Asked Questions</h2>
+      
+      <div class="faq-item">
+        <div class="faq-question" onclick="this.parentElement.classList.toggle('active')">
+          <span>How much can I save with OneShot AI?</span>
+          <span class="faq-toggle">▼</span>
+        </div>
+        <div class="faq-answer">
+          <p>On average, users see 20-30% token reduction on optimized prompts. The savings compound quickly—with 10 prompts a day, that's thousands of pounds annually. Your actual savings depend on how often you use it and your current prompt quality.</p>
+        </div>
+      </div>
+      
+      <div class="faq-item">
+        <div class="faq-question" onclick="this.parentElement.classList.toggle('active')">
+          <span>Does OneShot work with ChatGPT and Claude?</span>
+          <span class="faq-toggle">▼</span>
+        </div>
+        <div class="faq-answer">
+          <p>Yes! OneShot AI works on both ChatGPT (chatgpt.com) and Claude (claude.ai). The extension automatically detects weak prompts on both platforms and offers real-time optimization suggestions.</p>
+        </div>
+      </div>
+      
+      <div class="faq-item">
+        <div class="faq-question" onclick="this.parentElement.classList.toggle('active')">
+          <span>How does the token calculation work?</span>
+          <span class="faq-toggle">▼</span>
+        </div>
+        <div class="faq-answer">
+          <p>OneShot estimates tokens using industry-standard methods (~1.3 tokens per word) and calculates cost savings based on real API pricing (GPT-4: $0.03 per 1K tokens, converted to GBP). The estimate is conservative and based on your actual prompt text.</p>
+        </div>
+      </div>
+      
+      <div class="faq-item">
+        <div class="faq-question" onclick="this.parentElement.classList.toggle('active')">
+          <span>Is my data safe?</span>
+          <span class="faq-toggle">▼</span>
+        </div>
+        <div class="faq-answer">
+          <p>OneShot never stores, logs, or sends your prompts anywhere. All analysis happens locally in your browser. We only collect anonymized usage stats (with your consent). Your privacy is our top priority.</p>
+        </div>
+      </div>
+      
+      <div class="faq-item">
+        <div class="faq-question" onclick="this.parentElement.classList.toggle('active')">
+          <span>Can I cancel anytime?</span>
+          <span class="faq-toggle">▼</span>
+        </div>
+        <div class="faq-answer">
+          <p>Absolutely. No lock-in contracts, no cancellation fees. Cancel your subscription anytime from your account. Your access to the extension continues until the end of your billing period.</p>
+        </div>
+      </div>
+      
+      <div class="faq-item">
+        <div class="faq-question" onclick="this.parentElement.classList.toggle('active')">
+          <span>What about Mac/Windows/Linux support?</span>
+          <span class="faq-toggle">▼</span>
+        </div>
+        <div class="faq-answer">
+          <p>OneShot is a Chrome extension, so it works on any device running Google Chrome—Mac, Windows, Linux, even Chromebooks. Full installation guides for each OS are included.</p>
+        </div>
+      </div>
+      
+      <div class="faq-item">
+        <div class="faq-question" onclick="this.parentElement.classList.toggle('active')">
+          <span>Do you offer refunds?</span>
+          <span class="faq-toggle">▼</span>
+        </div>
+        <div class="faq-answer">
+          <p>We stand behind our product. If you're not satisfied within 14 days, we'll process a full refund—no questions asked. Email support@castilliai.com to request one.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="cta">
+    <div class="cta-content">
+      <h2>Ready to Save on API Costs?</h2>
+      <p>Join hundreds of teams optimizing their AI workflows with OneShot AI.</p>
+      <a href="#pricing" class="btn btn-secondary">View Pricing</a>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-content">
+      <div class="footer-links">
+        <a href="mailto:danwyatt398@gmail.com">Contact</a>
+        <a href="#pricing">Pricing</a>
+        <a href="#faq">FAQ</a>
+        <a href="http://www.castilliai.com">CastilliAI</a>
+      </div>
+      
+      <div class="footer-bottom">
+        <p>&copy; 2024 OneShot AI. All rights reserved. | Built by <a href="http://www.castilliai.com" style="color: #9ca3af; text-decoration: none;">CastilliAI</a></p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // FAQ Toggle
+    document.querySelectorAll('.faq-question').forEach(question => {
+      question.addEventListener('click', function() {
+        this.parentElement.classList.toggle('active');
+      });
+    });
+    
+    // Redirect to checkout
+    function redirectToCheckout(plan) {
+      // Replace these with your actual Stripe checkout URLs
+      const checkoutUrls = {
+        essential: 'https://buy.stripe.com/YOUR_ESSENTIAL_LINK_HERE',
+        pro: 'https://buy.stripe.com/YOUR_PRO_LINK_HERE'
+      };
+      
+      const url = checkoutUrls[plan];
+      if (url.includes('YOUR_')) {
+        alert('⚠️ Stripe checkout links not configured yet.\n\nContact support: danwyatt398@gmail.com');
+        return;
+      }
+      
+      window.location.href = url;
+    }
+  </script>
+
+</body>
+</html>
